@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head><title>OAuthGuard RS - DNAT</title>
+<style>body{font-family:monospace;background:#0a0a0a;color:#00ff88;padding:20px}.box{border:1px solid #00ff88;padding:20px;max-width:800px;margin:auto}input{width:65%;padding:12px;background:#111;color:#fff;border:1px solid #00ff88}button{padding:12px;background:#00ff88;color:#000;font-weight:bold}.alto{color:#ff4444;font-size:24px}.seguro{color:#00ff88;font-size:24px}.log{background:#111;padding:10px;margin-top:15px;font-size:12px}</style>
+</head><body><div class="box">
+<h1>OAuthGuard RS</h1><p>Andre Unic | Caxias do Sul | DNAT Security</p>
+<form action="/scan" method="post"><input name="target_url" placeholder="https://sualoja.com.br" required><button>VERIFICAR (15s)</button></form>
+{% if result %}<div class="log">{% for l in result.logs %}<div>> {{ l }}</div>{% endfor %}</div>
+<h2 class="{{ 'seguro' if result.status=='SITE SEGURO RS' else 'alto' }}">{{ result.status }}</h2>
+{% for f in result.findings %}<div style="border:1px solid #ff4444;padding:10px;margin:10px 0"><b>[{{ f.risco }}] {{ f.id }}</b><br>{{ f.desc }}<br><b>FACA ASSIM:</b> <code>{{ f.fix }}</code></div>{% endfor %}
+{% if result.status == 'SITE SEGURO RS' %}<div style="border:3px dashed #00ff88;padding:15px;text-align:center">✓ SELO SITE SEGURO RS - {{ url }}</div>{% endif %}{% endif %}
+</div></body></html>
